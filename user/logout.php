@@ -4,7 +4,12 @@
 	   $pw = '1234';
 	   $db_name = 'dbproject';
 	   $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
-	session_destroy();
+	   session_start(); // 세션 시작
+
+	   $_SESSION = array(); // 세션 변수 비우기
+	   
+	   session_destroy(); // 세션 종료
+	   
 ?>
 <meta charset="utf-8">
-<script>alert("로그아웃되었습니다."); location.href="/"; </script>
+<script>alert("로그아웃되었습니다."); location.href="../as.php"; </script>
