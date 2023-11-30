@@ -3,12 +3,12 @@
 	   $user = 'root';
 	   $pw = '1234';
 	   $db_name = 'dbproject';
-	   $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
-	   session_start(); // 세션 시작
+	   $mysqli = new mysqli($host, $user, $pw, $db_name); 
+	   session_start(); 
 
-	   $_SESSION = array(); // 세션 변수 비우기
+	   $_SESSION = array(); 
 	   
-	   session_destroy(); // 세션 종료
+	   session_destroy();
 	   
 ?>
 <meta charset="utf-8">
