@@ -65,7 +65,7 @@ session_start();
     <div id="full">
         <div id="banner">
             <div id="main"><p>메인 화면</p></div>
-            <div id="infor"><p>영화 정보</p></div>
+            <div id="infor"><p>예매 확인</p></div>
             <div id="reser"><a href='movie/reservation.php'>영화 예매</a></div>
             <div id="mypage"><p>마이 페이지</p></div>         
 			<?php

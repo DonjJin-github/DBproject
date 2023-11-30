@@ -61,7 +61,7 @@
     <div id="full">
         <div id="banner">
             <div id="main"><p>메인 화면</p></div>
-            <div id="infor"><p>영화 정보</p></div>
+            <div id="infor"><p>예매 확인</p></div>
             <div id="reser"><p>영화 예매</p></div>
             <div id="mypage"><p>마이 페이지</p></div>
             <?php
@@ -160,15 +160,16 @@
             <div class="container">
             <div class="screen"></div>
 
+            <form id="reservationForm" action="pay.php" method="POST">
             <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
+                <div class="seat" id="A1">A1</div>
+                <div class="seat" id="A2">A2</div>
+                <div class="seat" id="A3">A3</div>
+                <div class="seat" id="A4">A4</div>
+                <div class="seat" id="A5">A5</div>
+                <div class="seat" id="A6">A6</div>
+                <div class="seat" id="A7">A7</div>
+                <div class="seat" id="A8">A8</div>
             </div>
             <div class="row">
                 <div class="seat"></div>
@@ -224,7 +225,9 @@
 
             <p class="text">
             You have selected <span id="count">0</span> seats for a price of \<span id="total">0</span>
+           <button type="submit" id="reserveButton">예약하기</button>
             </p>
+            </form>
 
             
         </div>
@@ -233,39 +236,39 @@
 
 <script>
     const movieOptions = document.getElementById('movieOptions');
-const container = document.querySelector('.container');
-const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-const count = document.getElementById('count');
-const total = document.getElementById('total');
+    const container = document.querySelector('.container');
+    const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+    const count = document.getElementById('count');
+    const total = document.getElementById('total');
 
 
-let ticketPrice = 12000;
+    let ticketPrice = 12000;
 
-populateUI();
+    populateUI();
 
-function populateUI() {
-  // Check if the page is refreshed
-  if (performance.navigation.type === 1) {
-    localStorage.clear(); // Clear local storage on refresh
-  }
+    function populateUI() {
+    // Check if the page is refreshed
+    if (performance.navigation.type === 1) {
+        localStorage.clear(); // Clear local storage on refresh
+    }
 
-  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
 
-  if (selectedSeats !== null && selectedSeats.length > 0) {
-    selectedSeats.forEach((seatIndex) => {
-      seats[seatIndex].classList.add('selected');
-    });
-  }
+    if (selectedSeats !== null && selectedSeats.length > 0) {
+        selectedSeats.forEach((seatIndex) => {
+        seats[seatIndex].classList.add('selected');
+        });
+    }
 
-  const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
 
-  if (selectedMovieIndex !== null) {
-    movieOptions.selectedIndex = selectedMovieIndex;
-  }
-}
+    if (selectedMovieIndex !== null) {
+        movieOptions.selectedIndex = selectedMovieIndex;
+    }
+    }
 
 
-function updateSelectedCount() {
+    function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .selected');
   const selectedSeatCount = +selectedSeats.length;
 
@@ -278,29 +281,65 @@ function updateSelectedCount() {
 }
 
 movieOptions.addEventListener('click', (event) => {
-    const movieOption = event.target.closest('.movie-option');
+  const movieOption = event.target.closest('.movie-option');
 
-    if (movieOption) {
-        const movieUID = movieOption.getAttribute('data-movieuid');
+  if (movieOption) {
+    const movieUID = movieOption.getAttribute('data-movieuid');
 
-        document.querySelectorAll('.row .selected').forEach((seat) => {
-            seat.classList.remove('selected');
-        });
-        localStorage.removeItem('selectedSeats');
-        updateSelectedCount();
+    document.querySelectorAll('.row .selected').forEach((seat) => {
+      seat.classList.remove('selected');
+    });
+    localStorage.removeItem('selectedSeats');
+    updateSelectedCount();
 
-        // Use AJAX or fetch to send movieUID to the server if needed
-        // ...
+    // Update the UI with the selected movie name
+    document.getElementById("Pick").innerHTML = "선택된 영화: " + movieOption.querySelector('span').textContent;
 
-        // Update the UI with the selected movie name
-        document.getElementById("Pick").innerHTML = "선택된 영화: " + movieOption.querySelector('span').textContent;
+    // Update total value in the hidden input field
+    const selectedSeatCount = document.querySelectorAll('.row .selected').length;
+    const totalValue = selectedSeatCount * ticketPrice;
+    total.textContent = totalValue;
 
-        const movieIndex = Array.from(movieOptions.children).indexOf(movieOption);
-        updateSelectedCount();
-    }
+    // Use AJAX or fetch to send movieUID to the server if needed
+    // ...
+
+    // Update total value in the hidden input field
+    document.querySelector('input[name="total"]').value = totalValue;
+
+    const movieIndex = Array.from(movieOptions.children).indexOf(movieOption);
+    updateSelectedCount();
+  }
 });
 
 
+    document.getElementById('reservationForm').addEventListener('submit', function (event) {
+  // 기본 폼 제출 방지
+  event.preventDefault();
+
+  // 선택한 좌석 데이터 수집
+  const selectedSeats = document.querySelectorAll('.row .selected');
+  const selectedSeatIds = [...selectedSeats].map((seat) => seat.id);
+
+  // 선택한 좌석 데이터를 숨은 입력 필드에 추가
+  const seatIdsInput = document.createElement('input');
+  seatIdsInput.type = 'hidden';
+  seatIdsInput.name = 'selectedSeatIds';
+  seatIdsInput.value = JSON.stringify(selectedSeatIds);
+  this.appendChild(seatIdsInput);
+
+  // 기존 total 값 가져오기
+  const totalValue = document.getElementById('total').textContent;
+
+  // 기존 total 값을 숨은 입력 필드에 추가
+  const totalInput = document.createElement('input');
+  totalInput.type = 'hidden';
+  totalInput.name = 'total';
+  totalInput.value = totalValue;
+  this.appendChild(totalInput);
+
+  // 이제 폼 제출
+  this.submit();
+});
 
 container.addEventListener('click', (event) => {
   if (event.target.classList.contains('seat') && !event.target.classList.contains('occupied')) {
@@ -310,7 +349,8 @@ container.addEventListener('click', (event) => {
   }
 });
 
-updateSelectedCount();
+
+    updateSelectedCount();
 
 
 </script>
