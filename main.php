@@ -66,9 +66,8 @@ session_start();
         <div id="banner">
             <div id="main"><p>메인 화면</p></div>
             <div id="infor"><p>영화 정보</p></div>
-            <div id="reser"><p>영화 예매</p></div>
-            <div id="mypage"><p>마이 페이지</p></div>
-            
+            <div id="reser"><a href='movie/reservation.php'>영화 예매</a></div>
+            <div id="mypage"><p>마이 페이지</p></div>         
 			<?php
 			if(isset($_SESSION['userid'])){
 				echo "<div id='login'>{$_SESSION['userid']} 님 환영합니다.<a href='/user/logout.php'><input type='button' value='로그아웃' /></a></div>";
