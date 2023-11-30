@@ -1,5 +1,4 @@
 <?php 
-session_start();
    $host = 'localhost:3306';
    $user = 'root';
    $pw = '1234';
@@ -45,13 +44,7 @@ session_start();
         height: 100%;
         width: 19%;
     }
-    #movie1, #movie2, #movie3, #movie4, #movie5{
-        float: left;
-        text-align: center;
-        margin: 5px 5px 5px 5px;
-        height: 40%;
-        width: 19%;
-    }
+
     p{
         text-align: center;
     }
@@ -68,29 +61,11 @@ session_start();
             <div id="infor"><p>영화 정보</p></div>
             <div id="reser"><p>영화 예매</p></div>
             <div id="mypage"><p>마이 페이지</p></div>
-            
-			<?php
-			if(isset($_SESSION['userid'])){
-				echo "<div id='login'>{$_SESSION['userid']} 님 환영합니다.<a href='/user/logout.php'><input type='button' value='로그아웃' /></a></div>";
-			?>
-			<?php 
-				}else{
-				echo "<div id='login'><a href='index.php'>로그인</a></div>";
-			} 
-			?>
+            <div id="login"><a href="index.php">로그인</a></div>
         </div>
         <p>무비 차트</p>
         <div id="content">
-            <div id="movie1">movie1</div>
-            <div id="movie2">movie2</div>
-            <div id="movie3">movie3</div>
-            <div id="movie4">movie4</div>
-            <div id="movie5">movie5</div>
-            <div id="movie1">예매율1</div>
-            <div id="movie2">예매율2</div>
-            <div id="movie3">예매율3</div>
-            <div id="movie4">예매율4</div>
-            <div id="movie5">예매율5</div>
+
         </div>
     </div>
 </body>
