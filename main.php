@@ -1,4 +1,5 @@
 <?php 
+session_start();
    $host = 'localhost:3306';
    $user = 'root';
    $pw = '1234';
@@ -15,7 +16,7 @@
 	if(isset($_SESSION['userid'])){
 		echo "<h2>{$_SESSION['userid']} 님 환영합니다.</h2>";
 	?>
-	<a href="/member/logout.php"><input type="button" value="로그아웃" /></a>
+	<a href="/user/logout.php"><input type="button" value="로그아웃" /></a>
 	<?php 
 		}else{
 		echo "<script>alert('잘못된 접근입니다.'); history.back();</script>";
