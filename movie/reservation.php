@@ -70,7 +70,7 @@
 
                         // Check if the movie was found
                         if ($row) {
-                            echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '<br>상영시간' . $row['movietime'] .'</span>';
+                            echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] .'</span>';
                         } else {
                             echo '<span>선택된 영화를 찾을 수 없습니다.</span>';
                         }

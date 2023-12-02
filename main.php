@@ -11,7 +11,7 @@ session_start();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="default.css" rel="stylesheet" type="text/css" />
+<link href="default.css" rel="stylesheet" />
 </head>
 <body>
     <div id="full">

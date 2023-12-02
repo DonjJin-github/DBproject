@@ -14,16 +14,27 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <link href="../default.css" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>결제 정보</title>
+    <style>
+    #content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 90%;
+    }
+    </style>
 </head>
     <body>
         <div id="full">
         <div id="banner">
             <div id="main"><p>메인 화면</p></div>
             <div id="infor"><p>예매 확인</p></div>
-            <div id="reser"><a href='movie/process.php'>영화 예매</a></div>
-            <div id="mypage"><a href='user/mypage.php'>마이 페이지</a></div>         
+            <div id="reser"><a href='process.php'>영화 예매</a></div>
+            <div id="mypage"><a href='../user/mypage.php'>마이 페이지</a></div>         
 			<?php
 			if(isset($_SESSION['userid'])){
 				echo "<div id='login'>{$_SESSION['userid']} 님 환영합니다.<a href='/user/logout.php'><input type='button' value='로그아웃' /></a></div>";
@@ -44,7 +55,7 @@
             if ($query_run) {
                 $row = mysqli_fetch_array($query_run);
                     if ($row) {
-                    echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '<br>상영시간' . $row['movietime'] . '</span>';
+                    echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] . '</span>';
                     } else {
                             echo '<span>선택된 영화를 찾을 수 없습니다.</span>';
                         }
@@ -56,7 +67,7 @@
                 $selectedSeatIds = json_decode($_POST['selectedSeatIds']);
 
                 if (!empty($selectedSeatIds)) {
-                    echo '<p>선택한 좌석 ID:</p>';
+                    echo '<p>선택한 좌석 ID</p>';
                     echo '<ul>';
                     foreach ($selectedSeatIds as $seatId) {
                         echo '<li>' . htmlspecialchars($seatId) . '</li>';
