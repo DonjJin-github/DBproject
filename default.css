@@ -1,4 +1,6 @@
 body, html {
+    background-color: #242333;
+    color: #fff;
     margin: 0;
     padding: 0;
     overflow-y: hidden; /* 세로 스크롤 비활성화 */
@@ -23,6 +25,10 @@ body, html {
     justify-content: space-around;
 }
 #main, #infor, #reser, #mypage, #login{
+    border: 1px solid gery;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: #4c4a69;
     float: left;
     display: flex;
     align-items: center;
@@ -31,6 +37,12 @@ body, html {
     height: 100%;
     width: 19%;
 }
+
+#main:hover, #infor:hover, #reser:hover, #mypage:hover, #login:hover {
+    background-color: #625f7f;  /* 호버 시의 배경 색상 */
+    color: #fff;  /* 호버 시의 글자 색상 */
+}
+
 #movie1, #movie2, #movie3, #movie4, #movie5{
     float: left;
     text-align: center;
@@ -45,3 +57,16 @@ p{
 a {
  text-decoration-line: none;
 }
+
+a:link {
+    color : #fff;
+  }
+  a:visited {
+    color : #fff;
+  }
+  a:hover {
+    color : #fff;
+  }
+  a:active {
+    color : #fff
+  }

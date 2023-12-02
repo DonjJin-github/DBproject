@@ -16,8 +16,8 @@ session_start();
 <body>
     <div id="full">
         <div id="banner">
-            <div id="main"><p>메인 화면</p></div>
-            <div id="infor"><p>예매 확인</p></div>
+            <div id="main"><a href=''><p>메인 화면</p></div>
+            <div id="infor"><a href='movie/reserinfo.php'><p>예매 확인</p></div>
             <div id="reser"><a href='movie/process.php'>영화 예매</a></div>
             <div id="mypage"><a href='user/mypage.php'>마이 페이지</a></div>         
 			<?php

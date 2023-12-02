@@ -114,8 +114,8 @@ if (!isset($_SESSION['userid'])) {
             // Create hidden input for total
             var input3 = document.createElement("input");
             input3.setAttribute("type", "hidden");
-            input3.setAttribute("name", "total");
-            input3.setAttribute("value", "<?php echo $total; ?>");
+            input3.setAttribute("name", "price");
+            input3.setAttribute("value", "12000");
             form.appendChild(input3);
 
             document.body.appendChild(form);

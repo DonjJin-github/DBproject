@@ -27,63 +27,15 @@ $row = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
+    <link href="../default.css" rel="stylesheet" />
 </head>
-<style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        overflow-y: hidden; /* 세로 스크롤 비활성화 */
-    }
-
-    #full {
-        width: 100vw; /* 뷰포트 너비를 100%로 설정 */
-        height: 100vh; /* 뷰포트 높이를 100%로 설정 */   
-    }
-
-    #banner {
-        width: 100%;
-        height: 10%;
-        padding: 5px 5px 5px 5px;  
-    }
-    #content {
-        float: left;
-        width: 100%;
-        height: 90%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-    #main, #infor, #reser, #mypage, #login{
-        float: left;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 5px 5px 5px 5px;
-        height: 100%;
-        width: 19%;
-    }
-    #movie1, #movie2, #movie3, #movie4, #movie5{
-        float: left;
-        text-align: center;
-        margin: 5px 5px 5px 5px;
-        height: 40%;
-        width: 19%;
-    }
-    p{
-        text-align: center;
-    }
-
-    a {
-     text-decoration-line: none;
-    }
-</style>
 <body>
 <div id="full">
         <div id="banner">
-            <div id="main"><p>메인 화면</p></div>
-            <div id="infor"><p>예매 확인</p></div>
+        <div id="main"><a href='../main.php'><p>메인 화면</p></div>
+            <div id="infor"><a href='../movie/reserinfo.php'><p>예매 확인</p></div>
             <div id="reser"><a href='../movie/process.php'>영화 예매</a></div>
-            <div id="mypage"><a href='user/mypage.php'>마이 페이지</a></div>         
+            <div id="mypage"><a href=''>마이 페이지</a></div>         
 			<?php
 			if(isset($_SESSION['userid'])){
 				echo "<div id='login'>{$_SESSION['userid']} 님 환영합니다.<a href='/user/logout.php'><input type='button' value='로그아웃' /></a></div>";
