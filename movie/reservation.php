@@ -148,15 +148,15 @@
             <ul class="showcase">
             <li>
                 <div class="seat"></div>
-                <small>N/A</small>
+                <small>예매 가능</small>
             </li>
             <li>
                 <div class="seat selected"></div>
-                <small>Selected</small>
+                <small>선택된 좌석</small>
             </li>
             <li>
                 <div class="seat occupied"></div>
-                <small>Occupied</small>
+                <small>예매 불가</small>
             </li>
             </ul>
 
