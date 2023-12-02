@@ -47,8 +47,8 @@ if (isset($_POST['upload'])) {
     $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
 
     // Escape the values and use placeholders in the query
-    $moviename = $mysqli->real_escape_string('어벤저스');
-    $movietime = $mysqli->real_escape_string('15:00~16:00');
+    $moviename = $mysqli->real_escape_string('어벤져스:엔드게임');
+    $movietime = $mysqli->real_escape_string('16:00~18:00');
 
     $query = "INSERT INTO movie (moviename, movietime, image) VALUES ('$moviename', '$movietime', '$file')";
 

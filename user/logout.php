@@ -12,4 +12,4 @@
 	   
 ?>
 <meta charset="utf-8">
-<script>alert("로그아웃되었습니다."); location.href="../as.php"; </script>
+<script>alert("로그아웃되었습니다."); location.href="../main.php"; </script>

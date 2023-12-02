@@ -5,6 +5,11 @@
    $pw = '1234';
    $db_name = 'dbproject';
       $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
+
+      if (!isset($_SESSION['userid'])) {
+        header('Location: ../index.php');
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -76,7 +81,28 @@
         </div>
         <div id="content">
           <div class="movie-container">
-                <p style = "font-size : 20px" id="Pick"></p>
+                <p style = "font-size : 20px" id="Pick">
+                <?php
+                    $movie_id = $_SESSION['storedValue'];
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+
+                    if ($query_run) {
+                        // Fetch the data from the result set
+                        $row = mysqli_fetch_array($query_run);
+
+                        // Check if the movie was found
+                        if ($row) {
+                            echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '</span>';
+                        } else {
+                            echo '<span>선택된 영화를 찾을 수 없습니다.</span>';
+                        }
+                    } else {
+                        // Handle the query error
+                        echo '<span>쿼리 실행 중 오류가 발생했습니다.</span>';
+                    }
+                ?>
+                </p>
                 <div class="movie-options" id="movieOptions">
                 <?php
                             $query = "SELECT * FROM movie WHERE movieUID = 1";
@@ -162,69 +188,150 @@
 
             <form id="reservationForm" action="pay.php" method="POST">
             <div class="row">
-                <div class="seat" id="A1">A1</div>
-                <div class="seat" id="A2">A2</div>
-                <div class="seat" id="A3">A3</div>
-                <div class="seat" id="A4">A4</div>
-                <div class="seat" id="A5">A5</div>
-                <div class="seat" id="A6">A6</div>
-                <div class="seat" id="A7">A7</div>
-                <div class="seat" id="A8">A8</div>
+            <?php
+                 
+               $movie_id = $_SESSION['storedValue'];
+                // 원하는 좌석 범위 지정
+                $start_seat = 1;
+                $end_seat = 8;
+
+                // 반복문을 사용하여 여러 좌석을 생성하고 출력
+                for ($i = $start_seat; $i <= $end_seat; $i++) {
+                    $seatname = 'A' . $i;
+                    $query = "SELECT * FROM seat WHERE movie_id = $movie_id AND seatname = '$seatname'";
+                    $query_run = mysqli_query($mysqli, $query);
+
+                    // 좌석 정보 조회
+                    $row = mysqli_fetch_array($query_run);
+
+                    // 좌석 상태에 따라 다른 스타일의 div 출력
+                    if ($row['seatstatus'] == 'N/A') {
+                        echo "<div class='seat' id='$seatname'>$seatname</div>";
+                    } else {
+                        echo "<div class='seat occupied' id='$seatname'>$seatname</div>";
+                    }
+                }                
+
+            ?>
+
             </div>
             <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
+            <?php
+                 
+               $movie_id = $_SESSION['storedValue'];
+                
+                // 원하는 좌석 범위 지정
+                $start_seat = 1;
+                $end_seat = 8;
+
+                // 반복문을 사용하여 여러 좌석을 생성하고 출력
+                for ($i = $start_seat; $i <= $end_seat; $i++) {
+                    $seatname = 'B' . $i;
+                    $query = "SELECT * FROM seat WHERE movie_id = $movie_id AND seatname = '$seatname'";
+                    $query_run = mysqli_query($mysqli, $query);
+
+                    // 좌석 정보 조회
+                    $row = mysqli_fetch_array($query_run);
+
+                    // 좌석 상태에 따라 다른 스타일의 div 출력
+                    if ($row['seatstatus'] == 'N/A') {
+                        echo "<div class='seat' id='$seatname'>$seatname</div>";
+                    } else {
+                        echo "<div class='seat occupied' id='$seatname'>$seatname</div>";
+                    }
+                }                
+
+            ?>
             </div>
             <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
+            <?php
+                 
+               $movie_id = $_SESSION['storedValue'];
+                
+                // 원하는 좌석 범위 지정
+                $start_seat = 1;
+                $end_seat = 8;
+
+                // 반복문을 사용하여 여러 좌석을 생성하고 출력
+                for ($i = $start_seat; $i <= $end_seat; $i++) {
+                    $seatname = 'C' . $i;
+                    $query = "SELECT * FROM seat WHERE movie_id = $movie_id AND seatname = '$seatname'";
+                    $query_run = mysqli_query($mysqli, $query);
+
+                    // 좌석 정보 조회
+                    $row = mysqli_fetch_array($query_run);
+
+                    // 좌석 상태에 따라 다른 스타일의 div 출력
+                    if ($row['seatstatus'] == 'N/A') {
+                        echo "<div class='seat' id='$seatname'>$seatname</div>";
+                    } else {
+                        echo "<div class='seat occupied' id='$seatname'>$seatname</div>";
+                    }
+                }                
+
+            ?>
             </div>
             <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
+            <?php
+                 
+                 $movie_id = $_SESSION['storedValue'];
+                  
+                  // 원하는 좌석 범위 지정
+                  $start_seat = 1;
+                  $end_seat = 8;
+  
+                  // 반복문을 사용하여 여러 좌석을 생성하고 출력
+                  for ($i = $start_seat; $i <= $end_seat; $i++) {
+                      $seatname = 'D' . $i;
+                      $query = "SELECT * FROM seat WHERE movie_id = $movie_id AND seatname = '$seatname'";
+                      $query_run = mysqli_query($mysqli, $query);
+  
+                      // 좌석 정보 조회
+                      $row = mysqli_fetch_array($query_run);
+  
+                      // 좌석 상태에 따라 다른 스타일의 div 출력
+                      if ($row['seatstatus'] == 'N/A') {
+                          echo "<div class='seat' id='$seatname'>$seatname</div>";
+                      } else {
+                          echo "<div class='seat occupied' id='$seatname'>$seatname</div>";
+                      }
+                  }                
+  
+              ?>
+
             </div>
             <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
+            <?php
+                 
+               $movie_id = $_SESSION['storedValue'];
+                
+                // 원하는 좌석 범위 지정
+                $start_seat = 1;
+                $end_seat = 8;
+
+                // 반복문을 사용하여 여러 좌석을 생성하고 출력
+                for ($i = $start_seat; $i <= $end_seat; $i++) {
+                    $seatname = 'E' . $i;
+                    $query = "SELECT * FROM seat WHERE movie_id = $movie_id AND seatname = '$seatname'";
+                    $query_run = mysqli_query($mysqli, $query);
+
+                    // 좌석 정보 조회
+                    $row = mysqli_fetch_array($query_run);
+
+                    // 좌석 상태에 따라 다른 스타일의 div 출력
+                    if ($row['seatstatus'] == 'N/A') {
+                        echo "<div class='seat' id='$seatname'>$seatname</div>";
+                    } else {
+                        echo "<div class='seat occupied' id='$seatname'>$seatname</div>";
+                    }
+                }                
+
+            ?>
             </div>
             </div>
 
             <p class="text">
-            You have selected <span id="count">0</span> seats for a price of \<span id="total">0</span>
+            You have selected <span id="count">0</span> seats for a price of \<span id="total" ></span>
            <button type="submit" id="reserveButton">예약하기</button>
             </p>
             </form>
@@ -267,7 +374,6 @@
     }
     }
 
-
     function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .selected');
   const selectedSeatCount = +selectedSeats.length;
@@ -281,35 +387,37 @@
 }
 
 movieOptions.addEventListener('click', (event) => {
-  const movieOption = event.target.closest('.movie-option');
+    const movieOption = event.target.closest('.movie-option');
 
-  if (movieOption) {
-    const movieUID = movieOption.getAttribute('data-movieuid');
+    if (movieOption) {
+        const movieUID = movieOption.getAttribute('data-movieuid');
+        console.log('선택된 movieUID:', movieUID);
 
-    document.querySelectorAll('.row .selected').forEach((seat) => {
-      seat.classList.remove('selected');
-    });
-    localStorage.removeItem('selectedSeats');
-    updateSelectedCount();
+        
+        window.location.href = "process.php?result=" + movieUID;
 
-    // Update the UI with the selected movie name
-    document.getElementById("Pick").innerHTML = "선택된 영화: " + movieOption.querySelector('span').textContent;
 
-    // Update total value in the hidden input field
-    const selectedSeatCount = document.querySelectorAll('.row .selected').length;
-    const totalValue = selectedSeatCount * ticketPrice;
-    total.textContent = totalValue;
+        document.querySelectorAll('.row .selected').forEach((seat) => {
+            seat.classList.remove('selected');
+        });
+        localStorage.removeItem('selectedSeats');
+        updateSelectedCount();
 
-    // Use AJAX or fetch to send movieUID to the server if needed
-    // ...
 
-    // Update total value in the hidden input field
-    document.querySelector('input[name="total"]').value = totalValue;
+        // 숨겨진 입력 필드에서 총 값 업데이트
+        const selectedSeatCount = document.querySelectorAll('.row .selected').length;
+        const totalValue = selectedSeatCount * ticketPrice;
+        total.textContent = totalValue;
 
-    const movieIndex = Array.from(movieOptions.children).indexOf(movieOption);
-    updateSelectedCount();
-  }
+        document.querySelector('input[name="total"]').value = totalValue;
+
+        const movieIndex = Array.from(movieOptions.children).indexOf(movieOption);
+        updateSelectedCount();
+    }
 });
+
+
+
 
 
     document.getElementById('reservationForm').addEventListener('submit', function (event) {
