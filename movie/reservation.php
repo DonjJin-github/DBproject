@@ -16,24 +16,9 @@
 <head>
 <meta charset="UTF-8">
 <link href="res.css" rel="stylesheet"  />
+<link href="../default.css" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        overflow-y: hidden; /* 세로 스크롤 비활성화 */
-    }
-
-    #full {
-        width: 100vw; 
-        height: 100vh;  
-    }
-
-    #banner {
-        width: 100%;
-        height: 10%;
-        padding: 5px 5px 5px 5px;  
-    }
     #content {
         display: flex;
         flex-direction: column;
@@ -51,14 +36,6 @@
         margin: 5px 5px 5px 5px;
         height: 100%;
         width: 19%;
-    }
-
-    p{
-        text-align: center;
-    }
-
-    a {
-     text-decoration-line: none;
     }
 </style>
 </head>
@@ -93,7 +70,7 @@
 
                         // Check if the movie was found
                         if ($row) {
-                            echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '</span>';
+                            echo '<span>'.'선택된 영화 : ' . $row['moviename'] . '<br>상영시간' . $row['movietime'] .'</span>';
                         } else {
                             echo '<span>선택된 영화를 찾을 수 없습니다.</span>';
                         }
