@@ -75,6 +75,7 @@ if (!isset($_SESSION['userid'])) {
             echo '<p>올바르지 않은 접근입니다.</p>';
         }
         ?>
+
         <div id="payment">
             <form action="checkreser.php" method="post">
                 <button type="submit">결제하기</button>

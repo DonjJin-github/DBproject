@@ -30,18 +30,103 @@ session_start();
 			} 
 			?>
         </div>
-        <p>무비 차트</p>
+        <p style="font-size:25px">상영중인 영화</p>
         <div id="content">
-            <div id="movie1">movie1</div>
-            <div id="movie2">movie2</div>
-            <div id="movie3">movie3</div>
-            <div id="movie4">movie4</div>
-            <div id="movie5">movie5</div>
-            <div id="movie1">예매율1</div>
-            <div id="movie2">예매율2</div>
-            <div id="movie3">예매율3</div>
-            <div id="movie4">예매율4</div>
-            <div id="movie5">예매율5</div>
+            <div id="movie1">
+            <?php
+                    $movie_id = 1;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+                    echo '<img width:"289px" height="414px" src="data:image;base64,'.base64_encode($row['image']).'" alt="Image">';
+                ?>
+            </div>
+            <div id="movie2">
+            <?php
+                    $movie_id = 2;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+                    echo '<img width:"289px" height="414px" src="data:image;base64,'.base64_encode($row['image']).'" alt="Image">';
+                ?>
+            </div>
+            <div id="movie3">
+            <?php
+                    $movie_id = 3;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+                    echo '<img width:"289px" height="414px" src="data:image;base64,'.base64_encode($row['image']).'" alt="Image">';
+                ?>
+            </div>
+            <div id="movie4">
+            <?php
+                    $movie_id = 4;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+                    echo '<img width:"289px" height="414px" src="data:image;base64,'.base64_encode($row['image']).'" alt="Image">';
+                ?>
+            </div>
+            <div id="movie5">
+            <?php
+                    $movie_id = 5;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+                    echo '<img width:"289px" height="414px" src="data:image;base64,'.base64_encode($row['image']).'" alt="Image">';
+                ?>
+            </div>
+            <div id="movie1">
+            <?php
+                    $movie_id = 1;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+
+                    echo '<span>'. $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] .'</span>';
+                ?>
+            </div>
+            <div id="movie2">
+            <?php
+                    $movie_id = 2;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+
+                    echo '<span>'. $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] .'</span>';
+                ?>
+            </div>
+            <div id="movie3">
+            <?php
+                    $movie_id = 3;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+
+                    echo '<span>'. $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] .'</span>';
+                ?>
+            </div>
+            <div id="movie4">
+            <?php
+                    $movie_id = 4;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+
+                    echo '<span>'. $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] .'</span>';
+                ?>
+            </div>
+            <div id="movie5">
+            <?php
+                    $movie_id = 5;
+                    $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
+                    $query_run = mysqli_query($mysqli, $query);
+                    $row = mysqli_fetch_array($query_run);
+
+                    echo '<span>'. $row['moviename'] . '<br>상영시간 : ' . $row['movietime'] .'</span>';
+                ?>
+            </div>
         </div>
     </div>
 </body>

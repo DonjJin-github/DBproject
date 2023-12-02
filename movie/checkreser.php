@@ -22,14 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($mysqli, $sql); // Fix the variable name here
     $row = mysqli_fetch_assoc($result);
     $Uid = $row['Uid'];
-    echo "Uid: " . $Uid;
 
-    echo "<h2>결제 정보</h2>";
-    echo "<p>선택된 영화 ID: $movie_id</p>";
+    $a = "INSERT INTO pay (user_id) VALUES ('$Uid')";
+    $b = mysqli_query($mysqli, $a);
+    $pay_id = mysqli_insert_id($mysqli);
+    
+
+
 
     if (!empty($selectedSeatIds)) {
-        echo '<p>선택한 좌석 ID:</p>';
-        echo '<ul>';
         foreach ($selectedSeatIds as $seatId) {
             $sql1 = "SELECT * FROM seat WHERE seatname = '$seatId' AND movie_id = $movie_id";
             $result1 = mysqli_query($mysqli, $sql1);
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $sql2 = "UPDATE seat SET seatstatus = 'occupied' WHERE seatname = '$seatId' AND movie_id = $movie_id";
                 $result2 = mysqli_query($mysqli, $sql2);
-                $query = "INSERT INTO pay (price, user_id, seat_id) VALUES ('$price', '$Uid', '$seat_id')";
+                $query = "INSERT INTO paylist (price, seat_id, pay_id) VALUES ('$price', '$seat_id', '$pay_id')";
                 $query_run = mysqli_query($mysqli, $query);
                 header('Location: reserinfo.php');
             }
