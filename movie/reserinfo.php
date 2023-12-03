@@ -10,38 +10,49 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch data from paylist table
-$paylist_data_query = "SELECT * FROM paylist";
-$paylist_data_result = $conn->query($paylist_data_query);
+// Get the current username from the session
+$currentUsername = $_SESSION['userid'];
 
-if ($paylist_data_result->num_rows > 0) {
-    echo "Data in paylist table:<br>";
-    while ($row = $paylist_data_result->fetch_assoc()) {
-        foreach ($row as $key => $value) {
-            echo "$key: $value<br>";
+// Query to fetch user_id based on the current username
+$userQuery = "SELECT Uid FROM user WHERE userid = '$currentUsername'";
+$userResult = $conn->query($userQuery);
+
+if ($userResult->num_rows > 0) {
+    $userRow = $userResult->fetch_assoc();
+    $currentUserId = $userRow['Uid'];
+
+    // Query to fetch payUid, seat_id, seatname, movie_id, moviename, and movietime based on the current user's ID
+    $sql = "SELECT pay.payUid, paylist.seat_id, seat.seatname, seat.movie_id, movie.moviename, movie.movietime
+            FROM pay
+            JOIN paylist ON pay.payUid = paylist.pay_id
+            JOIN seat ON paylist.seat_id = seat.seatUid
+            JOIN movie ON seat.movie_id = movie.movieUid
+            WHERE pay.user_id = $currentUserId";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $prevPayUid = null; // Variable to store the previous payUid
+
+        // Iterate over the remaining rows
+        while ($row = $result->fetch_assoc()) {
+            if ($prevPayUid !== $row["payUid"]) {
+                echo "<br>";
+                echo "예약번호" . $row["payUid"] . "<br>";
+                echo " 영화제목 : " . $row["moviename"]. "<br>";
+                echo " 상영시간 : " . $row["movietime"]. "<br>";
+                echo " 좌석번호 : " ;
+                $prevPayUid = $row["payUid"];
+            }
+
+            echo $row["seatname"] . " ";
         }
-        echo "<br>";
+    } else {
+        echo "예약 정보 없음";
     }
 } else {
-    echo "No data found in paylist table";
+    echo "User not found";
 }
 
-// Fetch data from pay table
-$pay_data_query = "SELECT * FROM pay";
-$pay_data_result = $conn->query($pay_data_query);
-
-if ($pay_data_result->num_rows > 0) {
-    echo "<br>Data in pay table:<br>";
-    while ($row = $pay_data_result->fetch_assoc()) {
-        foreach ($row as $key => $value) {
-            echo "$key: $value<br>";
-        }
-        echo "<br>";
-    }
-} else {
-    echo "No data found in pay table";
-}
-
-// Close the connection
 $conn->close();
 ?>
