@@ -1,7 +1,7 @@
 <?php
-   $host = 'localhost:3306';
-   $user = 'root';
-   $pw = '1234';
+   $host = '192.168.56.102:4567';
+   $user = 'dongjin';
+   $pw = 'cdj696812~';
    $db_name = 'dbproject';
    $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 ?>
@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<link href="../default.css" rel="stylesheet" />
 <title>회원가입 폼</title>
 <script>
 function checkid(){
@@ -24,9 +25,27 @@ function checkid(){
 
 </script>
 </head>
-<body>
-	<form method="post" action="member_ok.php" name="memform">
-		<h1>회원가입 폼</h1>
+<body style="display: flex; align-items: center; justify-content: center;">
+
+<div id="full">
+        <div id="banner">
+            <div id="main"><a href='../main.php'><p>메인 화면</p></div>
+            <div id="infor"><a href='../movie/reserinfo.php'><p>예매 확인</p></div>
+            <div id="reser"><a href='../movie/process.php'>영화 예매</a></div>
+            <div id="mypage"><a href='mypage.php'>마이 페이지</a></div>         
+			<?php
+			if(isset($_SESSION['userid'])){
+				echo "<div id='login'>{$_SESSION['userid']} 님 환영합니다.<a href='/user/logout.php'><input type='button' value='로그아웃' /></a></div>";
+			?>
+			<?php 
+				}else{
+				echo "<div id='login'><a href='index.php'>로그인</a></div>";
+			} 
+			?>
+        </div>
+        <div id="content">
+	<form method="post" action="user_ok.php" name="memform">
+		<h1>회원가입</h1>
 			<fieldset>
 				<legend>입력사항</legend>
 					<table>
@@ -61,5 +80,7 @@ function checkid(){
 				<input type="submit" value="가입하기" /><input type="reset" value="다시쓰기" />
 		</fieldset>
 	</form>
+        </div>
+    </div>
 </body>
 </html>
