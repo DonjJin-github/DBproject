@@ -1,10 +1,10 @@
 <?php
 session_start();
-$host = 'localhost:3306';
-$user = 'root';
-$pw = '1234';
+$host = '192.168.56.102:4567';
+$user = 'dongjin';
+$pw = 'cdj696812~';
 $db_name = 'dbproject';
-$mysqli = new mysqli($host, $user, $pw, $db_name);
+$mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 
 if (!isset($_SESSION['userid'])) {
     header('Location: ../index.php');
@@ -35,7 +35,7 @@ if (!isset($_SESSION['userid'])) {
         <!-- ... (Your existing code for banner) ... -->
     </div>
     <div id="content">
-        <h1>결제 정보</h1>
+        <h1>예매 정보</h1>
         <?php
         $movie_id = $_SESSION['storedValue'];
         $query = "SELECT * FROM movie WHERE movieUID = $movie_id";
@@ -76,9 +76,13 @@ if (!isset($_SESSION['userid'])) {
         }
         ?>
 
-        <div id="payment">
+        <div id="payment" style="    float: left; display: flex;align-items: center; justify-content: center;">
             <form action="checkreser.php" method="post">
-                <button type="submit">결제하기</button>
+                <button type="submit">예매 확정</button>
+            </form>
+            &nbsp
+            <form action="reservation.php">
+                <button type="submit">다시 선택</button>
             </form>
         </div>
     </div>

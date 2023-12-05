@@ -1,10 +1,10 @@
 <?php
 // 데이터베이스 연결
-$host = 'localhost:3306';
-$user = 'root';
-$pw = '1234';
+$host = '192.168.56.102:4567';
+$user = 'dongjin';
+$pw = 'cdj696812~';
 $db_name = 'dbproject';
-$mysqli = new mysqli($host, $user, $pw, $db_name);
+$mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 
 // 사용자 입력
 $userid = $_POST['userid'];

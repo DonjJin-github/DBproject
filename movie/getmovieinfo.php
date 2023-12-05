@@ -1,10 +1,10 @@
 <?php
    session_start();
-   $host = 'localhost:3306';
-   $user = 'root';
-   $pw = '1234';
+   $host = '192.168.56.102:4567';
+   $user = 'dongjin';
+   $pw = 'cdj696812~';
    $db_name = 'dbproject';
-      $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
+   $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 
 if (isset($_POST['movieUID'])) {
     $movieUID = $_POST['movieUID'];

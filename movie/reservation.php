@@ -1,10 +1,10 @@
 <?php 
    session_start();
-   $host = 'localhost:3306';
-   $user = 'root';
-   $pw = '1234';
+   $host = '192.168.56.102:4567';
+   $user = 'dongjin';
+   $pw = 'cdj696812~';
    $db_name = 'dbproject';
-      $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
+   $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 
       if (!isset($_SESSION['userid'])) {
         header('Location: ../index.php');
@@ -308,8 +308,8 @@
             </div>
 
             <p class="text">
-            You have selected <span id="count">0</span> seats for a price of \<span id="total" ></span>
-           <button type="submit" id="reserveButton">예약하기</button>
+            선택한 좌석 수 :  <span id="count">0</span> 좌석 가격 :  \<span id="total" ></span>
+           <button type="submit" id="reserveButton">예매하기</button>
             </p>
             </form>
 

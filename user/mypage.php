@@ -1,10 +1,9 @@
 <?php
-session_start();
-$host = 'localhost:3306';
-$user = 'root';
-$pw = '1234';
-$db_name = 'dbproject';
-$mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
+   $host = '192.168.56.102:4567';
+   $user = 'dongjin';
+   $pw = 'cdj696812~';
+   $db_name = 'dbproject';
+   $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 
 // 로그인 여부 확인
 if (!isset($_SESSION['userid'])) {
@@ -63,8 +62,16 @@ $row = $result->fetch_assoc();
                 <td><input type="password" name="pw2"></td>
             </tr>
             <tr>
-                <td>전화번호</td>
-                <td><input type="text" name="tel" placeholder="<?= $row['tel'] ?? '' ?>"></td>
+                <td>이름</td>
+                <td><?php echo isset($row['username']) ? $row['username'] : ''; ?></td>
+            </tr>
+            <tr>
+                <td>성별</td>
+                <td><?php echo isset($row['usersex']) ? $row['usersex'] : ''; ?></td>
+            </tr>
+            <tr>
+                <td>주소</td>
+                <td><?php echo isset($row['useradress']) ? $row['useradress'] : ''; ?></td>
             </tr>
             <tr>
                 <td>이메일</td>

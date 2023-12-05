@@ -1,8 +1,8 @@
 <?php
 session_start();
-$host = 'localhost:3306';
-$user = 'root';
-$pw = '1234';
+$host = '192.168.56.102:4567';
+$user = 'dongjin';
+$pw = 'cdj696812~';
 $db_name = 'dbproject';
 $mysqli = new mysqli($host, $user, $pw, $db_name); //db 연결
 
@@ -74,7 +74,7 @@ $row = $result->fetch_assoc();
                     // Iterate over the remaining rows
                     while ($row = $result->fetch_assoc()) {
                         if ($prevPayUid !== $row["payUid"]) {
-                            echo "<br>";
+                            echo "<br><br>";
                             echo " 예매번호 : " . $row["payUid"] . "<br>";
                             echo " 영화제목 : " . $row["moviename"]. "<br>";
                             echo " 상영시간 : " . $row["movietime"]. "<br>";
